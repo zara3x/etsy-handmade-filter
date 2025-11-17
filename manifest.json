@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Etsy Handmade Filter",
+  "version": "1.0.0",
+  "description": "Unofficial extension - Filter Etsy listings to show only handmade items. Not affiliated with Etsy, Inc.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.etsy.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.etsy.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/icon128.png", "icons/iconoir/peace-hand.svg", "icons/iconoir/refresh-circle.svg", "icons/iconoir/undo-circle.svg", "icons/iconoir/xmark-circle.svg", "icons/iconoir/plus.svg", "icons/iconoir/minus.svg", "icons/iconoir/gift.svg", "icons/iconoir/gift-opened.svg", "music/holiday-music-loop.mp3"],
+      "matches": ["https://www.etsy.com/*"]
+    }
+  ]
+}
+
