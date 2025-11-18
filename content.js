@@ -1758,7 +1758,7 @@ setTimeout(() => {
       
       // Only open GitHub if dev mode wasn't activated
       if (!peaceIconHeldForDevMode) {
-        window.open('https://github.com', '_blank');
+        window.open('https://github.com/zara3x/etsy-handmade-filter', '_blank');
       }
       
       // Reset flag after a short delay to allow for next interaction
@@ -1805,7 +1805,7 @@ setTimeout(() => {
         peaceIconHoldTimeout = null;
       }
       if (!peaceIconHeldForDevMode) {
-        window.open('https://github.com', '_blank');
+        window.open('https://github.com/zara3x/etsy-handmade-filter', '_blank');
       }
       setTimeout(() => {
         peaceIconHeldForDevMode = false;
