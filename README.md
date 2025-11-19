@@ -27,7 +27,7 @@ Filters listings based on:
 - 🎯 **Customizable Keywords**: Add your own keywords to include or exclude in titles/descriptions
 - 🔀 **Flexible Logic**: Choose between "Permissive" (OR) or "Strict" (AND) matching
 - 🎨 **Search Page**: Automatically highlights products and matching attributes on the search page as well as individual product pages
-- 🎯 **Product Page**: Highlight matching keywords and badges to see why an item fits your filter criteria
+- 🧶 **Product Page**: Highlight matching keywords and badges to see why an item fits your filter criteria
 - 💾 **Intelligent Caching**: Smart caching system to reduce server requests and prevent rate limiting
 - ⚠️ **Error Handling**: Visual indicators for items that fail to load (429 errors, etc.)
 - 👁️ **Viewport-based**: Only checks items in or near the viewport
@@ -68,8 +68,9 @@ Filters listings based on:
 
 - **Extension not working**: Make sure you're on an Etsy search results page or product page
 - **Rate limiting errors**: The extension includes delays and caching to prevent this, but if you see red error overlays, you might have to wait a few minutes before continuing to browse. The extension will automatically retry failed items.
+- **Acess Denied**: If you use this too heavily it's possible Etsy will give you a captcha to solve and even block access to the website - don't panic just wait half an hour and try again.
 - **Filter panel not appearing**: Refresh the page or check the browser console for errors
-- **Results not being modified**: Sometimes the page gets in a weird state so check and recheck a setting to re-trigger the filtering
+- **Results not being modified**: Sometimes the page gets in a weird state so check and recheck a setting to re-trigger the filtering or reload the page
 
 ## ⚖️ License
 
