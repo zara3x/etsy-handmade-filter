@@ -68,7 +68,7 @@ Filters listings based on:
 
 - **Extension not working**: Make sure you're on an Etsy search results page or product page
 - **Rate limiting errors**: The extension includes delays and caching to prevent this, but if you see red error overlays, you might have to wait a few minutes before continuing to browse. The extension will automatically retry failed items.
-- **Acess Denied**: If you use this too heavily it's possible Etsy will give you a captcha to solve and even block access to the website - don't panic just wait half an hour and try again.
+- **Access Denied**: If you use this too heavily it's possible Etsy will give you a captcha to solve and even block access to the website - don't panic just wait half an hour and try again.
 - **Filter panel not appearing**: Refresh the page or check the browser console for errors
 - **Results not being modified**: Sometimes the page gets in a weird state so check and recheck a setting to re-trigger the filtering or reload the page
 
