@@ -2057,7 +2057,7 @@ async function checkListing(listing) {
     document.getElementById('others').textContent = otherCount;
     
   } catch (error) {
-    console.error('Error checking listing:', error);
+    console.warn('Error checking listing:', error);
     // Show error overlay for network errors or other exceptions
     showListingError(listing, 'Error fetching');
     
