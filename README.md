@@ -1,8 +1,20 @@
-# 🎨 Etsy Handmade Filter
+# <img align="center" width="48" height="48" alt="icon-full" src="https://github.com/user-attachments/assets/34243453-409c-414c-b25e-0593f401813c" /> Etsy Handmade Filter
 
-**⚠️ DISCLAIMER: This is an unofficial extension and is not affiliated with, endorsed by, or connected to Etsy, Inc. This extension is created and maintained by independent developers.**
+A Chrome extension that filters Etsy search results to show only handmade items based on badges, titles, and descriptions ✨
 
-A Chrome extension that filters Etsy search results to show only handmade items based on badges, titles, and descriptions.
+---
+
+**⚠️ This is an unofficial extension and is not affiliated with, endorsed by, or connected to Etsy, Inc. This extension is created and maintained by independent developers.**
+
+
+## 📸 Screencaps
+https://github.com/user-attachments/assets/3dc0b285-41e5-47a0-85ba-9817288c94a9
+
+|     |     |
+| --- | --- |
+| <img width="1280" height="800" alt="handmade-1" src="https://github.com/user-attachments/assets/2e77c7c0-7fd7-4db0-815c-2aa13c935293" /> | <img width="1280" height="800" alt="handmade-2" src="https://github.com/user-attachments/assets/3ef8f478-31e6-45b7-8120-f91f88a155e7" /> |
+
+
 
 ## ✨ Features
 
@@ -14,7 +26,8 @@ Filters listings based on:
   - Description keyword matching
 - 🎯 **Customizable Keywords**: Add your own keywords to include or exclude in titles/descriptions
 - 🔀 **Flexible Logic**: Choose between "Permissive" (OR) or "Strict" (AND) matching
-- 🎨 **Product Highlighting**: Automatically highlights products and matching attributes on the search page as well as individual product pages
+- 🎨 **Search Page**: Automatically highlights products and matching attributes on the search page as well as individual product pages
+- 🎯 **Product Page**: Highlight matching keywords and badges to see why an item fits your filter criteria
 - 💾 **Intelligent Caching**: Smart caching system to reduce server requests and prevent rate limiting
 - ⚠️ **Error Handling**: Visual indicators for items that fail to load (429 errors, etc.)
 - 👁️ **Viewport-based**: Only checks items in or near the viewport
@@ -32,14 +45,7 @@ Filters listings based on:
 4. The filter will automatically start checking listings in the viewport
 5. Handmade items will be highlighted with a green border
 6. Non-handmade items will be dimmed and grayscale
-7. Items with fetch errors will show a red or yellow ovrerlay
-
-### 🎯 Product Page Features
-
-When viewing an individual product page, the extension will:
-- Highlight matching keywords in the product title and description
-- Highlight matching badges in the product details
-- Make it easy to see why an item matches your filter criteria
+7. Items with fetch errors will show a red or yellow overlay
 
 ## 🔧 How It Works
 
@@ -63,7 +69,7 @@ When viewing an individual product page, the extension will:
 - **Extension not working**: Make sure you're on an Etsy search results page or product page
 - **Rate limiting errors**: The extension includes delays and caching to prevent this, but if you see red error overlays, you might have to wait a few minutes before continuing to browse. The extension will automatically retry failed items.
 - **Filter panel not appearing**: Refresh the page or check the browser console for errors
-- **Keywords not highlighting**: Make sure you've enabled "Check Title" or "Check Description" and added keywords
+- **Results not being modified**: Sometimes the page gets in a weird state so check and recheck a setting to re-trigger the filtering
 
 ## ⚖️ License
 
@@ -73,12 +79,10 @@ See the [LICENSE](LICENSE) file for the full license text.
 
 ## 🙏 Attribution
 
-- **Peace Hand Icon**: From [Iconoir](https://iconoir.com/), licensed under the MIT License
+- **Icons**: [Iconoir](https://iconoir.com/) licensed under the MIT License
 - **Holiday Music**: "Holiday Music Loop" by [Dana Music](https://pixabay.com/users/danamusic-31920663/) from [Pixabay](https://pixabay.com/)
 
-## ⚠️ Disclaimer
-
-**This extension is unofficial and unaffiliated with Etsy, Inc.**
+## ⚠️ DISCLAIMER
 
 This Chrome extension is an independent project created by third-party developers. It is not created, endorsed, sponsored, or affiliated with Etsy, Inc. or any of its subsidiaries or affiliates.
 
