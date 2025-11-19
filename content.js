@@ -2792,6 +2792,21 @@ const intersectionObserver = new IntersectionObserver((entries) => {
 // Initial check of viewport items (uses same function as scrolling)
 checkInitialViewportListings();
 
+// Initialize tracking variables after initial check
+setTimeout(() => {
+  const initialListings = findAllListingContainers();
+  previousListingCount = initialListings.length;
+  initialListings.forEach(listing => {
+    const link = listing.querySelector('a[href*="/listing/"]');
+    if (link) {
+      const listingId = getListingId(link.href);
+      if (listingId) {
+        previousListingIds.add(listingId);
+      }
+    }
+  });
+}, REQUEST_DELAY_MS + 500);
+
 // Observe all existing listings
 function observeListings() {
   const listings = findAllListingContainers();
@@ -2819,9 +2834,58 @@ if (currentCount > MAX_CACHE_ENTRIES) {
   evictOldestCacheEntries(currentCount - MAX_CACHE_ENTRIES);
 }
 
+// Track previous listing count to detect page changes
+let previousListingCount = 0;
+let previousListingIds = new Set();
+
 // Watch for new listings being added to the DOM
-const mutationObserver = new MutationObserver(() => {
+const mutationObserver = new MutationObserver((mutations) => {
+  // Check if search results container was cleared (all children removed)
+  let containerCleared = false;
+  for (const mutation of mutations) {
+    if (mutation.type === 'childList' && mutation.removedNodes.length > 0) {
+      // Check if a significant number of listings were removed
+      const currentListings = findAllListingContainers();
+      const currentCount = currentListings.length;
+      
+      // If we had listings before and now we have none or very few, it might be a page change
+      if (previousListingCount > 5 && currentCount === 0) {
+        containerCleared = true;
+        break;
+      }
+    }
+  }
+  
   setTimeout(() => {
+    const currentListings = findAllListingContainers();
+    const currentCount = currentListings.length;
+    
+    // Collect current listing IDs
+    const currentListingIds = new Set();
+    currentListings.forEach(listing => {
+      const link = listing.querySelector('a[href*="/listing/"]');
+      if (link) {
+        const listingId = getListingId(link.href);
+        if (listingId) {
+          currentListingIds.add(listingId);
+        }
+      }
+    });
+    
+    // Detect page change: if container was cleared, or if all listing IDs changed
+    if (containerCleared || (previousListingCount > 0 && currentCount > 0 && 
+        currentListingIds.size > 0 && 
+        [...currentListingIds].every(id => !previousListingIds.has(id)))) {
+      // All listings changed - this is likely a page change
+      // Don't update tracking here - handlePageChange() will reset and update them
+      handlePageChange();
+      return;
+    }
+    
+    // Update tracking
+    previousListingCount = currentCount;
+    previousListingIds = currentListingIds;
+    
     observeListings();
     // Also do a batch check for items near viewport (uses same function as scrolling)
     checkInitialViewportListings();
@@ -2850,6 +2914,10 @@ function handlePageChange() {
   checkedListings.clear();
   listingDataCache.clear();
   rateLimitedListings.clear(); // Clear rate-limited queue on page change
+  
+  // Reset tracking variables
+  previousListingCount = 0;
+  previousListingIds.clear();
   
   // Reset counters
   madeByCount = 0;
@@ -2895,6 +2963,21 @@ function handlePageChange() {
     observeListings();
     checkInitialViewportListings();
     
+    // Update tracking variables after new listings are loaded
+    setTimeout(() => {
+      const newListings = findAllListingContainers();
+      previousListingCount = newListings.length;
+      newListings.forEach(listing => {
+        const link = listing.querySelector('a[href*="/listing/"]');
+        if (link) {
+          const listingId = getListingId(link.href);
+          if (listingId) {
+            previousListingIds.add(listingId);
+          }
+        }
+      });
+    }, REQUEST_DELAY_MS + 500);
+    
     // Highlight product page if we're on one
     highlightProductPage();
   }, REQUEST_DELAY_MS + 300);
@@ -2907,26 +2990,63 @@ const originalReplaceState = history.replaceState;
 
 history.pushState = function(...args) {
   originalPushState.apply(history, args);
-  if (window.location.href !== currentUrl) {
-    currentUrl = window.location.href;
-    handlePageChange();
+  // Check URL from arguments (args[2] is the URL) or from location
+  let newUrl = window.location.href;
+  if (args.length > 2 && args[2] && typeof args[2] === 'string') {
+    newUrl = args[2];
+    // Construct full URL if relative path was provided
+    if (!newUrl.startsWith('http')) {
+      try {
+        newUrl = new URL(newUrl, window.location.origin).href;
+      } catch (e) {
+        // If URL construction fails, use location.href
+        newUrl = window.location.href;
+      }
+    }
+  }
+  if (newUrl !== currentUrl) {
+    currentUrl = newUrl;
+    // Use setTimeout to ensure DOM has time to update after navigation
+    setTimeout(() => {
+      handlePageChange();
+    }, 100);
   }
 };
 
 history.replaceState = function(...args) {
   originalReplaceState.apply(history, args);
-  if (window.location.href !== currentUrl) {
-    currentUrl = window.location.href;
-    handlePageChange();
+  // Check URL from arguments (args[2] is the URL) or from location
+  let newUrl = window.location.href;
+  if (args.length > 2 && args[2] && typeof args[2] === 'string') {
+    newUrl = args[2];
+    // Construct full URL if relative path was provided
+    if (!newUrl.startsWith('http')) {
+      try {
+        newUrl = new URL(newUrl, window.location.origin).href;
+      } catch (e) {
+        // If URL construction fails, use location.href
+        newUrl = window.location.href;
+      }
+    }
+  }
+  if (newUrl !== currentUrl) {
+    currentUrl = newUrl;
+    // Use setTimeout to ensure DOM has time to update after navigation
+    setTimeout(() => {
+      handlePageChange();
+    }, 100);
   }
 };
 
 // Method 2: Listen for popstate (back/forward buttons)
 window.addEventListener('popstate', () => {
-  if (window.location.href !== currentUrl) {
-    currentUrl = window.location.href;
-    handlePageChange();
-  }
+  // Use setTimeout to ensure location is updated
+  setTimeout(() => {
+    if (window.location.href !== currentUrl) {
+      currentUrl = window.location.href;
+      handlePageChange();
+    }
+  }, 100);
 });
 
 // Method 3: Periodically check for URL changes (fallback for edge cases)
