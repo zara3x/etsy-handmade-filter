@@ -1,19 +1,19 @@
 # <img align="center" width="48" height="48" alt="icon-full" src="https://github.com/user-attachments/assets/34243453-409c-414c-b25e-0593f401813c" /> Etsy Handmade Filter
+A Chrome extension that filters Etsy search results to show only handmade items ✨
 
-A Chrome extension that filters Etsy search results to show only handmade items based on badges, titles, and descriptions ✨
+<a href="https://chromewebstore.google.com/detail/etsy-handmade-filter/aiocpbdmcbdiclfhdcclfaeppimljkjg"><img width="150" height="150" alt="chrome-store" src="https://github.com/user-attachments/assets/e239aa02-eb51-444e-b74d-f9c44aa17c2b"/></a>
 
----
 
 **⚠️ This is an unofficial extension and is not affiliated with, endorsed by, or connected to Etsy, Inc. This extension is created and maintained by independent developers.**
 
 
 ## 📸 Screencaps
-https://github.com/user-attachments/assets/3dc0b285-41e5-47a0-85ba-9817288c94a9
 
 |     |     |
 | --- | --- |
 | <img width="1280" height="800" alt="handmade-1" src="https://github.com/user-attachments/assets/2e77c7c0-7fd7-4db0-815c-2aa13c935293" /> | <img width="1280" height="800" alt="handmade-2" src="https://github.com/user-attachments/assets/3ef8f478-31e6-45b7-8120-f91f88a155e7" /> |
 
+https://github.com/user-attachments/assets/3dc0b285-41e5-47a0-85ba-9817288c94a9
 
 
 ## ✨ Features
